@@ -184,6 +184,11 @@ Component({
         }
       })
     },
+    onHandelCancel: function(){
+      wx.navigateBack({
+        delta: 1
+      })
+    },
     onCreate: function(){
       this.data.noCreated && this.setData({
         noCreated: false
