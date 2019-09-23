@@ -3,6 +3,7 @@ export default {
   "height": 750+10+460+30+30+500+500*8,
   "scale": 0.5,
   "fillStyle": "#FFFFFF",
+  "autoSave": true,
   "children": [
       {
         "type": "group",

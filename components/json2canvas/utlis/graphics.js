@@ -14,12 +14,6 @@ class Graphics extends _Graphics {
     this.beginPath();
 
     switch (option.type) {
-      case TYPE.image:
-        if (option.r > 0) {
-          this.setRoundedRect(option);
-          console.log("image");
-        }
-        break;
       case TYPE.rect:
         if (option.r > 0) {
           this.setRoundedRect(option);

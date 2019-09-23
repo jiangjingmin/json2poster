@@ -1,9 +1,0 @@
-<!--pages/poster/poster.wxml-->
-<view class='goback' catchtap='goback'>
-  <image src='/images/goback.png'></image>
-</view>
-
-<poster id="poster" class="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
-</poster>
-
-<view class="pagebg" style="background: {{defaultColor}};"></view>

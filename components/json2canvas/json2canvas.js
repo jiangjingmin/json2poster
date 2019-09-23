@@ -46,7 +46,7 @@ Component({
         noCreated: false
       })
       !this.data.hideLoading && wx.showLoading({
-        title: '长图生成中...',
+        title: this.data.painting.loadingMsg || '长图生成中...',
         duration: 900000
       });
     }
@@ -96,11 +96,14 @@ Component({
               imageUrl: imageUrl,
               isFinish: true
             })
+            this.triggerEvent('isFinish', { isFinish: true })
             !this.data.hideLoading && wx.hideLoading();
             this.triggerEvent('getImage', { tempFilePath: imageUrl, isOk: true })
-            setTimeout(() => {
-              this.onSavePoster(imageUrl);
-            }, 300)
+            if(this.data.painting.autoSave){
+              setTimeout(() => {
+                this.onSavePoster(imageUrl);
+              }, 300)
+            }
           } else {
             // 图片生成失败
             !this.data.hideLoading && wx.hideLoading();
@@ -181,12 +184,14 @@ Component({
         }
       })
     },
-    onHandelCancel: function(){
-      wx.navigateBack({
-        delta: 1
-      })
-    },
     onCreate: function(){
+      this.data.noCreated && this.setData({
+        noCreated: false
+      })
+      !this.data.hideLoading && wx.showLoading({
+        title: this.data.painting || '长图生成中...',
+        duration: 900000
+      });
       this.readyPigment()
     }
   }

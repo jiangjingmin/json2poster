@@ -131,32 +131,16 @@ function handleImage({ option, parent }) {
         if (option.fixHeight) {
           bitmap.scaleY = option.height/bitmap.height;
         }
-        // 圆 - 以短边为直径
+        // 圆
         if (option.isCircular) {
             const clipPath = new cax.Graphics();
-            let rWidth = width;
-            if(width > height){
-                rWidth = height
-            }
-            clipPath.arc(width / 2, height / 2, rWidth / 2, 0, Math.PI * 2);
+            clipPath.arc(width / 2, height / 2, width / 2, 0, Math.PI * 2);
             bitmap.clip(clipPath);
         }
         // 宽度固定，高度裁切
         if (option.isHeightClip) {
             const clipPath = new cax.Graphics();
             clipPath.rect(0, 0, width, option.height/option.width*width);
-            bitmap.clip(clipPath);
-        }
-        /** 
-         * 圆角图片：
-         * borderRadius
-         * borderColor
-         * borderWidth
-         */
-        console.log(bitmap);
-        if (option.r > 0) {
-            const clipPath = new cax.Graphics();
-            setRoundedRect(clipPath, option, width, height);
             bitmap.clip(clipPath);
         }
         
@@ -294,52 +278,5 @@ function restElement(root) {
         }
     });
 }
-/**
- * 画圆角矩形
- */
-function setRoundedRect(_this, option, width, height) {
-    option = Object.assign({
-        lineWidth: 1,
-        lt: true,
-        rt: true,
-        lb: true,
-        rb: true
-      }, option)
-    const r = option.r,
-      ax = option.r,
-      ay = 0,
-      bx = width,
-      by = 0,
-      cx = width,
-      cy = height,
-      dx = 0,
-      dy = height,
-      ex = 0,
-      ey = 0;
-      
-      _this.moveTo(ax, ay)
-    if (option.rt) {
-        _this.arcTo(bx, by, cx, cy, r)
-    } else {
-        _this.lineTo(bx, by)
-    }
 
-    if (option.rb) {
-        _this.arcTo(cx, cy, dx, dy, r)
-    } else {
-        _this.lineTo(cx, cy)
-    }
-
-    if (option.lb) {
-        _this.arcTo(dx, dy, ex, ey, r)
-    } else {
-        _this.lineTo(dx, dy)
-    }
-
-    if (option.lt) {
-        _this.arcTo(ex, ey, ax, ay, r)
-    } else {
-        _this.lineTo(ex, ey)
-    }
-}
 export { draw }
