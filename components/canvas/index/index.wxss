@@ -1,0 +1,19 @@
+.poster-container{
+  overflow: hidden;
+  height: 0;
+  position: fixed;
+  top: -1000000px;
+  left: 0;
+  z-index: -1;
+}
+.canvas {
+  width: 750rpx;
+  height: 1080rpx;
+  margin: 0 auto;
+}
+.canvas.pro {
+  transform: translate3d(-9999rpx, 0, 0);
+}
+.canvas.debug {
+  border: 1rpx solid #e1e1e1;
+}

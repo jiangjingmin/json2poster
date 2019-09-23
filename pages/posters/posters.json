@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "json2canvas": "/components/json2canvas/json2canvas"
+  }
+}

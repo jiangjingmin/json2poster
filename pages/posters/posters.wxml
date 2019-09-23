@@ -1,0 +1,10 @@
+<!--pages/poster/poster.wxml-->
+<view class="poster-container">
+  <view class='goback' catchtap='goback'>
+    <image src='/images/goback.png'></image>
+  </view>
+
+  <json2canvas painting="{{painting}}" showCanvas="{{true}}" bind:getImage="bindGetImage" style=""></json2canvas>
+</view>
+
+<view class="pagebg" style="background: {{defaultColor}};"></view>

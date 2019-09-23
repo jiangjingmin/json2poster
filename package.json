@@ -1,0 +1,56 @@
+{
+  "name": "poster",
+  "version": "1.0.0",
+  "description": "微信小程序生成海报",
+  "main": "src/json2canvas.js",
+  "miniprogram": "dist_miniprogram",
+  "files": [
+      "dist_miniprogram",
+      "package.json",
+      "src",
+      "README.md"
+  ],
+  "scripts": {
+      "dev": "cross-env BUILD_TARGET=development webpack-dev-server --open --config webpack.config.js",
+      "build": "cross-env BUILD_TARGET=production node build/build.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/willnewii/json2canvas.git"
+  },
+  "author": {
+      "name": "willnewii",
+      "email": "willnewii@163.com"
+  },
+  "license": "ISC",
+  "bugs": {
+      "url": "https://github.com/willnewii/json2canvas/issues"
+  },
+  "homepage": "https://github.com/willnewii/json2canvas#readme",
+  "keywords": [
+      "canvas",
+      "web",
+      "weapp"
+  ],
+  "dependencies": {
+      "cax": "^1.3.1",
+      "tree-model": "^1.0.7"
+  },
+  "devDependencies": {
+      "@babel/core": "^7.4.5",
+      "@babel/plugin-transform-runtime": "^7.4.4",
+      "@babel/polyfill": "^7.4.4",
+      "@babel/preset-env": "^7.4.5",
+      "@babel/runtime-corejs2": "^7.4.5",
+      "babel-loader": "^8.0.6",
+      "chalk": "^2.4.2",
+      "clean-webpack-plugin": "^3.0.0",
+      "cross-env": "^5.2.0",
+      "del": "^4.1.1",
+      "html-webpack-plugin": "^3.2.0",
+      "webpack": "^4.33.0",
+      "webpack-cli": "^3.3.4",
+      "webpack-dev-server": "^3.7.1"
+  }
+}

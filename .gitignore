@@ -1,0 +1,11 @@
+# Build and Release Folders
+miniprogram_npm/
+# Other files and folders
+.settings/
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+
