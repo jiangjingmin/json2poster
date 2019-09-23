@@ -37,7 +37,8 @@ skeleton | String  | './images/skeleton.png' | 否 | 生成图片前骨架
 errorMsg| String   | "生成图片失败" | 否 | 生成失败时提示文案
 newCreateMsg | String | "点击重新生成" | 否 | 生成失败时按钮文案
 url | String |  | 否 | 背景图，支持本地和网络图片，注意https
-children | Array | | 否| 子元素数组  
+children | Array | | 否| 子元素数组
+autoSave | Boolean | false | 否 | 是否自动保存图片  
 
 #### Group（组）
 属性 | 类型 | 默认值 | 必填 | 说明
