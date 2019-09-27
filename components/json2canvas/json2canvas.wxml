@@ -2,7 +2,7 @@
 
 <view class="container">
   <view class="imgbox">
-    <image class="canvas-img" style="width: 650rpx;height: 990rpx;" src="{{imageUrl || painting.skeleton || './images/skeleton.png'}}" alt="" mode="widthFix"></image>
+    <image class="canvas-img" style="width: 650rpx;height: 800rpx;" src="{{imageUrl || painting.skeleton || './images/skeleton.png'}}" alt="" mode="widthFix"></image>
   </view>
 </view>
 

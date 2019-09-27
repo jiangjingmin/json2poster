@@ -44,11 +44,18 @@ Page({
   },
 
   /**
-   * 左上角返回
+   * 获取生成海报的完成状态
    */
-  goback: function() {
+  bindIsFinish(e){
+    var res = e.detail;
+    // console.log("bindIsFinish: ", res);
+    this.setData({
+      isFinish: res.isFinish
+    })
+  },
+  onHandelCancel: function(){
     wx.navigateBack({
       delta: 1
-    });
+    })
   },
 })

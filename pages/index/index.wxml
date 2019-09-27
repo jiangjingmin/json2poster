@@ -1,13 +1,44 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <view class="info">
+    提示：可根据实际业务选择以下两种方式生成海报
   </view>
-  <view class="btn-list">
-    <button class="btn" bindtap="bindCreatePoster">点击分享海报</button>
+  <view class="items">
+    <view class="item" bindtap="toShareCard">1. 在本页面生成海报 <text decode='true'> &gt;</text></view>
+    <view class="item" bindtap="bindCreatePoster">2. 跳转到新页面生成海报<text decode='true'> &gt;</text></view>
+  </view>
+</view>
+
+<!-- 海报弹层 -->
+<json2canvas wx:if="{{mycardShow || imageUrl}}" painting="{{painting}}" showCanvas="{{true}}" bind:getImage="bindGetImage" bind:isFinish="bindIsFinish" style="position: fixed;top: -99999999999px;"></json2canvas>
+<view class="mymod cardmod" wx:if="{{mycardShow}}" catchtap="onHandelCancel">
+  <view class="share-card-box">
+    <view class="imgbox">
+      <image wx:if="{{imageUrl}}" class="canvas-img" style="width: 650rpx;height: 880rpx;" src="{{imageUrl}}" alt=""></image>
+      <view wx:else class="sk-box">
+        <view class="sk-header skeleton-rect"></view>
+        <view class="sk-intro">
+          <view class="sk-left">
+            <view class="skeleton-rect"></view>
+            <view class="skeleton-rect"></view>
+            <view class="skeleton-rect"></view>
+            <view class="skeleton-rect"></view>
+          </view>
+          <view class="sk-right">
+            <view class="skeleton-rect"></view>
+            <view class="skeleton-rect"></view>
+          </view>
+        </view> 
+      </view>
+    </view>
+
+    <view class="footer">
+      <view class="cancel" wx:if="{{!isFinish}}" catchtap="onHandelCancel">
+        <text class="btn-cancel">取 消</text>
+      </view>
+      <view class="finish" wx:else catchtap="onSavePoster">
+        <text class="btn-finish">下载名片</text>
+      </view>
+    </view>
   </view>
 </view>

@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "json2canvas": "/components/json2canvas/json2canvas"
+  },
+  "navigationBarTitleText": "首页",
+  "navigationStyle": "default"
 }

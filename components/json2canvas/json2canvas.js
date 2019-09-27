@@ -194,7 +194,7 @@ Component({
         noCreated: false
       })
       !this.data.hideLoading && wx.showLoading({
-        title: this.data.painting || '长图生成中...',
+        title: this.data.painting.loadingMsg || '长图生成中...',
         duration: 900000
       });
       this.readyPigment()

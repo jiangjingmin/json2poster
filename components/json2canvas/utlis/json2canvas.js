@@ -69,7 +69,6 @@ function draw(option, selecter, page = null, callback) {
         stage.update();
         callback && callback(imgError);
     });
-
 }
 
 function handleGroup({ option, parent }) {
@@ -113,7 +112,7 @@ function handleImage({ option, parent }) {
     let bitmap = imageMap.get(option.url);
 
     if (bitmap) {
-        //标记位,如果一张图用到两次,应该clone.
+        //标记位,如果一张图用到两次,应该clone
         if (bitmap.used) {
             bitmap = bitmap.clone()
         } else {
@@ -127,23 +126,52 @@ function handleImage({ option, parent }) {
         bitmap.scale = option.width / width;
         setPosition(bitmap, option, parent);
 
-        // 固定高度，默认固定宽度
+        // 1. 默认宽度固定，高度自动
+
+        // 2. 宽高固定
         if (option.fixHeight) {
           bitmap.scaleY = option.height/bitmap.height;
         }
-        // 圆
-        if (option.isCircular) {
-            const clipPath = new cax.Graphics();
-            clipPath.arc(width / 2, height / 2, width / 2, 0, Math.PI * 2);
-            bitmap.clip(clipPath);
-        }
-        // 宽度固定，高度裁切
+        // 3. 宽度固定，下边高度裁切
         if (option.isHeightClip) {
             const clipPath = new cax.Graphics();
             clipPath.rect(0, 0, width, option.height/option.width*width);
             bitmap.clip(clipPath);
         }
-        
+        // 4. 以短边为准，居中
+        if (option.isCenter) {
+            let newWidth = option.width/option.height*height;
+            let newHeight = option.height/option.width*width;
+            let x = 0;
+            let y = 0;
+            if(height > newHeight){
+                y = -(height - newHeight)/2
+                bitmap.scaleX = option.width/bitmap.width;
+                bitmap.scaleY = option.width/bitmap.width;
+                bitmap.y = y; // 竖直偏移
+            }else if(height < newHeight){
+                x = -(width - newWidth)/2
+                bitmap.scaleX = option.height/bitmap.height;
+                bitmap.scaleY = option.height/bitmap.height;
+                bitmap.x = x; // 水平偏移
+            }
+            
+            const clipPath = new cax.Graphics();
+            clipPath.rect(0, 0, width+(x >= 0 ? x : - x), height+(y >= 0 ? y : -y));
+            bitmap.clip(clipPath);
+            clipPath.x = x; // 水平偏移
+            clipPath.y = y; // 竖直偏移    
+        }
+        // 圆，固定宽高，宽高不等时会变形
+        if (option.isCircular) {
+            /* console.log('bitmap: ', bitmap);
+            bitmap.scaleY = option.height/bitmap.height; */
+            
+            const clipPath = new cax.Graphics();
+            clipPath.arc(width / 2, height / 2, width / 2, 0, Math.PI * 2);
+            bitmap.clip(clipPath);
+            // clipPath.y = (width >= height ? (width - height) : -(height - width))/2; // 竖直偏移
+        }
         return bitmap;
     }
     return null;

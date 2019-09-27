@@ -1,5 +1,7 @@
 {
   "usingComponents": {
     "json2canvas": "/components/json2canvas/json2canvas"
-  }
+  },
+  "navigationBarTitleText": "生成海报",
+  "navigationStyle": "default"
 }

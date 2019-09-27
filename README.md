@@ -11,8 +11,11 @@ git clone git@gitee.com:jiangjingmin/json2poster.git
 // Github
 git clone git@github.com:jiangjingmin/json2poster.git
 ```
+#### 待研究
+- [ ] isCircular: 当图片宽高不一样时，暂不能以短边取中心显示
 
-#### 使用说明
+#### 实现功能
+- [x] [2019-09-24] 图片可等比例居中显示，以较短边为准
 - [x] 支持缩放 如果设计稿是750,而画布只有375时.你不需要任何换算,只需要将scale设置为0.5
 - [x] 支持分组(cax里很好用的一个功能)
 - [x] 图片支持圆角
@@ -37,8 +40,8 @@ skeleton | String  | './images/skeleton.png' | 否 | 生成图片前骨架
 errorMsg| String   | "生成图片失败" | 否 | 生成失败时提示文案
 newCreateMsg | String | "点击重新生成" | 否 | 生成失败时按钮文案
 url | String |  | 否 | 背景图，支持本地和网络图片，注意https
-children | Array | | 否| 子元素数组
-autoSave | Boolean | false | 否 | 是否自动保存图片  
+children | Array | | 否| 子元素数组  
+autoSave | Boolean | false | 否 | 是否自动保存图片
 
 #### Group（组）
 属性 | 类型 | 默认值 | 必填 | 说明
@@ -83,8 +86,9 @@ height | Number | | 是 | 高度
 x | Number | 0 | 否 | 相对于父元素左侧的距离
 y | Number | 0 | 否 | 相对于父元素顶部的距离
 isCircular | Boolean | false | 否 | 圆，以短边为直径
-fixHeight | Boolean | false | 否 | 固定宽高，默认固定宽度，高度自适应，有溢出
-isHeightClip | Boolean | false | 否 | 宽度固定，裁切底部高度溢出部分
+fixHeight | Boolean | false | 否 | 宽高固定，默认宽度固定，高度自动
+isHeightClip | Boolean | false | 否 | 宽度固定，下边高度裁切
+isCenter | Boolean | false | 否 | 以短边为准，居中
 
 #### Circle（圆）
 属性 | 类型 | 默认值 / 示例 | 必填 | 说明
@@ -96,12 +100,12 @@ x | Number | 0 | 否 | 相对于父元素左侧的距离
 y | Number | 0 | 否 | 相对于父元素顶部的距离
 r | Number | 20 | 否 | 半径
 strokeStyle | Number | | 否 | 边框颜色，例：'#FFFFFF'
-rt,rb,lt,lb	| Boolean | true | 分别控制四个角是否圆角，上,右下,左上,左下
-strokeStyle | String | | 否 | 边框颜色，例：'#FFFFFF'	
+rt,rb,lt,lb | Boolean | true | 分别控制四个角是否圆角，上,右下,左上,左下
+strokeStyle | String | | 否 | 边框颜色，例：'#FFFFFF'   
 lineWidth | String | 1 | 否 | 边框宽度
-fillStyle | String | | 否 | 填充颜色，例：#FFFFFF	
-linearGradient | String | | 否 | 渐变点起始坐标	[x1,y1,x2,y2]，同createLinearGradient
-colors | String | | 否 | 填充颜色，例：	[[0,'#CCC'],[0.2,'#AAA'],[1,'#AAA']]，同 addColorStop
+fillStyle | String | | 否 | 填充颜色，例：#FFFFFF   
+linearGradient | String | | 否 | 渐变点起始坐标 [x1,y1,x2,y2]，同createLinearGradient
+colors | String | | 否 | 填充颜色，例： [[0,'#CCC'],[0.2,'#AAA'],[1,'#AAA']]，同 addColorStop
 
 #### Rect（矩形）
 属性 | 类型 | 默认值 / 示例 | 必填 | 说明
@@ -113,11 +117,11 @@ x | Number | 0 | 否 | 相对于父元素左侧的距离
 y | Number | 0 | 否 | 相对于父元素顶部的距离
 r | Number | 20 | 否 | 半径
 strokeStyle | Number | | 否 | 边框颜色，例：'#FFFFFF'
-rt,rb,lt,lb	| Boolean | true | 分别控制四个角是否圆角，右上,右下,左上,左下
-strokeStyle | String | | 否 | 边框颜色，例：'#FFFFFF'	
+rt,rb,lt,lb | Boolean | true | 分别控制四个角是否圆角，右上,右下,左上,左下
+strokeStyle | String | | 否 | 边框颜色，例：'#FFFFFF'   
 lineWidth | String | 1 | 否 | 边框宽度
-fillStyle | String | | 否 | 填充颜色，例：#FFFFFF	
-linearGradient | String | | 否 | 渐变点起始坐标	[x1,y1,x2,y2]，同createLinearGradient，例：[0,0,100,0]由左向右渐变，[0,0,0,100]由上向下渐变
+fillStyle | String | | 否 | 填充颜色，例：#FFFFFF   
+linearGradient | String | | 否 | 渐变点起始坐标 [x1,y1,x2,y2]，同createLinearGradient，例：[0,0,100,0]由左向右渐变，[0,0,0,100]由上向下渐变
 colors | Array | | 否 | 填充颜色，也可理解为颜色节点，例：[[0,'#CCC'],[0.2,'#AAA'],[1,'#AAA']]，同 addColorStop
 
 > 示例：
